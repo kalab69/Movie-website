@@ -38,3 +38,18 @@ body{
     gap: 55px;
     padding: 20px;
 }
+.pageControl button{
+    padding: 20px;
+    background-color: rgb(34, 33, 33);
+    font-weight: bold;
+    font-size: 2em;
+    cursor: pointer;
+    margin-left: 60px;
+    margin-right: 60px;
+    color: aliceblue;
+    border-radius: 100%;
+    border: none;
+}
+.pageControl button:hover{
+    background-color: rgb(26, 25, 25);
+}
