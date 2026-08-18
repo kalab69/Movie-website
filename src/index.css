@@ -1,12 +1,11 @@
 .card{
-    width: 270px;
-    height: 480px;
-    overflow: auto;
+    width: 255px;
+    height: auto;
+    overflow: hidden;
     color: white;
     padding: 10px;
     border-radius: 15px;
     cursor: pointer;
-    margin: 30px;
 }
 .card:hover{
     background-color: rgba(41, 29, 29, 0.73);
@@ -14,7 +13,8 @@
     transition: 1s;
 }
 .card img{
-    width: 270px;
+    display: block;
+    width: 100%;
     height: 420px;
     border-radius: 15px;
 }
@@ -30,4 +30,11 @@ body{
      color: aqua;
     background-color: black;
     text-align: center;
+    
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 55px;
+    padding: 20px;
 }
