@@ -1,0 +1,33 @@
+.card{
+    width: 270px;
+    height: 480px;
+    overflow: auto;
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 30px;
+}
+.card:hover{
+    background-color: rgba(41, 29, 29, 0.73);
+    transform: translatey(-2px);
+    transition: 1s;
+}
+.card img{
+    width: 270px;
+    height: 420px;
+    border-radius: 15px;
+}
+.card h2{
+    margin: 0;
+}
+.movieInfo{
+    display: flex;
+    gap: 170px;
+
+}
+body{
+     color: aqua;
+    background-color: black;
+    text-align: center;
+}

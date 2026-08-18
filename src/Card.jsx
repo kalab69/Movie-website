@@ -1,4 +1,12 @@
-function Card(props){
-    return(<><img src="https://image.tmdb.org/t/p/w1280/4LwvU9SZc8QQzW1X1FAPhNbXnEU.jpg"></img></>)
+function Card(props) {
+    return (<div className="card">
+        <img src={props.image} alt={props.title}></img>
+        <h2>{props.title}</h2>
+        <div className="movieInfo">
+            <span>{props.year}</span>
+            <span>⭐{props.rating}</span>
+        </div>
+
+    </div>)
 }
 export default Card
