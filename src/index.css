@@ -62,7 +62,9 @@ body{
 .slider img{
     width: 100%;
     display: block;
-    height: 800px;
+    height: 630px;
+    object-fit: cover;
+    object-position: center top;
 }
 .movieDetails{
     position: absolute;
@@ -71,7 +73,7 @@ body{
     padding: 30px;
     color: white;
     text-align: left;
-    margin-bottom: 200px;
+    margin-bottom: 100px;
 
 }
 .movieDetails h1{
@@ -123,6 +125,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 14px;
 }
 .movieDetails button img{
     margin-top: 3px;
