@@ -6,8 +6,13 @@ function Slider(props){
             <div className="movieDetails">
             <h1>{props.title}</h1>
             <p>{props.description}</p>
-            <span>{new Date(props.year).getFullYear()}</span>
-            <span>⭐{props.rating.toFixed(2)}</span>
+            <span className ="span1">{new Date(props.year).getFullYear()}</span>
+            <span className ="span2">⭐{props.rating.toFixed(2)}</span>
+            <br></br>
+            <button>
+                 <img src="/play.png" alt="Play" />
+                {"  "} Play Now
+            </button>
             </div>   
         </div>
     )

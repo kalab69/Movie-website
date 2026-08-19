@@ -18,8 +18,7 @@ function App() {
     
 
     return (<div>
-        <h1>MOVIES WEBSITE</h1>
-        <SliderLoader></SliderLoader>
+        <SliderLoader/>
         <div className="container">
         {movies.map((movie) => (
 
