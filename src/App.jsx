@@ -1,4 +1,5 @@
 import Card from './Card'
+import SliderLoader from './SliderLoader'
 import { useState, useEffect } from 'react'
 const ImageUrl = `https://image.tmdb.org/t/p/w1280`;
 const SearchUrl = `https://api.themoviedb.org/3/search/movie?api_key=18fff5e1b57ed556bacc51cd41ead165&query=`;
@@ -7,7 +8,7 @@ function App() {
     const [count, setcount] = useState(1);
     useEffect(() => {
         window.scrollTo({top: 0, behavior: "smooth"});
-        const Api_URL = `https://api.themoviedb.org/3/discover/movie?api_key=18fff5e1b57ed556bacc51cd41ead165&page=${count}`;
+        const Api_URL = `https://api.themoviedb.org/3/discover/movie?api_key=18fff5e1b57ed556bacc51cd41ead165&include_adult=false&with_genres=12&page=${count}`;
 
         fetch(Api_URL).
             then(response => response.json()
@@ -18,6 +19,7 @@ function App() {
 
     return (<div>
         <h1>MOVIES WEBSITE</h1>
+        <SliderLoader></SliderLoader>
         <div className="container">
         {movies.map((movie) => (
 
