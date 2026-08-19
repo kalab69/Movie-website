@@ -2,12 +2,12 @@ function Slider(props){
 
     return(
         <div className = "slider">
-            <img src={props.image}></img>
+            <img src={props.image } alt={props.title}></img>
             <div className="movieDetails">
             <h1>{props.title}</h1>
             <p>{props.description}</p>
             <span>{new Date(props.year).getFullYear()}</span>
-            <span>{props.rating.toFixed(2,0)}</span>
+            <span>⭐{props.rating.toFixed(2)}</span>
             </div>   
         </div>
     )
