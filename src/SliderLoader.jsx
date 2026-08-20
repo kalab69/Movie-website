@@ -16,7 +16,7 @@ function SliderLoader() {
 
         const interval = setInterval(() => {
             setSlide(prevSlide => {
-                if (prevSlide !== 6) {
+                if (prevSlide < 6) {
                     return prevSlide + 1;
                 }
 
@@ -39,7 +39,7 @@ function SliderLoader() {
     }
     const nextSlide = ()=> {
         setSlide(priv=>{
-            if(priv==5){
+            if(priv==6){
                 return 0
             }
             else{
