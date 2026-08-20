@@ -15,10 +15,10 @@ function Slider(props) {
                 </button>
                 
             </div>
-            <button className="sliderNav left">
+            <button className="sliderNav left" onClick={props.privSlide}>
                     <img src="/left.png" alt="left" />
                 </button>
-                <button className="sliderNav right">
+                <button className="sliderNav right" onClick={props.nextSlide} >
                     <img src="/right.png" alt="right" />
                 </button>
         </div>

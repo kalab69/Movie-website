@@ -4,7 +4,7 @@ const Api_path = "https://api.themoviedb.org/3/trending/movie/week?api_key=18fff
 const ImageUrl = `https://image.tmdb.org/t/p/original`;
 function SliderLoader() {
     const [movies, setmovies] = useState([]);
-    const [slide, setSlide] = useState(1);
+    const [slide, setSlide] = useState(0);
     useEffect(() => {
 
         fetch(Api_path).then(response => response.json()
@@ -26,6 +26,29 @@ function SliderLoader() {
         return () => clearInterval(interval)
 
     }, [])
+
+    const privSlide = ()=> {
+        setSlide(priv=>{
+            if(priv==0){
+                return 5
+            }
+            else{
+                return priv-1;
+            }
+        })
+    }
+    const nextSlide = ()=> {
+        setSlide(priv=>{
+            if(priv==5){
+                return 0
+            }
+            else{
+                return priv+1;
+            }
+        })
+    }
+
+
     if (movies.length === 0) {
         return <p>Loading...</p>
     }
@@ -39,7 +62,10 @@ function SliderLoader() {
                     title={movies[slide].title}
                     year={movies[slide].release_date}
                     rating={movies[slide].vote_average}
-                    description={movies[slide].overview}></Slider>
+                    description={movies[slide].overview}
+                    nextSlide = {nextSlide}
+                    privSlide = {privSlide}
+                    ></Slider>
 
             }
         </>
