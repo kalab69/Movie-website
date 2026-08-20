@@ -1,7 +1,7 @@
 import Slider from './Slider'
 import { useState, useEffect } from 'react'
 const Api_path = "https://api.themoviedb.org/3/trending/movie/week?api_key=18fff5e1b57ed556bacc51cd41ead165"
-const ImageUrl = `https://image.tmdb.org/t/p/w1280`;
+const ImageUrl = `https://image.tmdb.org/t/p/original`;
 function SliderLoader() {
     const [movies, setmovies] = useState([]);
     const [slide, setSlide] = useState(1);

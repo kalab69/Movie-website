@@ -73,7 +73,7 @@ body{
     padding: 30px;
     color: white;
     text-align: left;
-    margin-bottom: 100px;
+    margin-bottom: 70px;
 
 }
 .movieDetails h1{
@@ -94,9 +94,7 @@ html, body {
 
     background:
         linear-gradient(to top, black, transparent 40%),
-        linear-gradient(to bottom, black, transparent 20%),
-        linear-gradient(to left, black, transparent 15%),
-        linear-gradient(to right, black, transparent 15%);
+        linear-gradient(to bottom, black, transparent 20%);
 
     pointer-events: none;
 }
@@ -141,4 +139,57 @@ html, body {
 .movieDetails button:active{
     transform: scale(0.9);
     transition: 0.3s;
+}
+.slider {
+    position: relative;
+    width: 100%;
+}
+
+.slider img {
+    width: 100%;
+    display: block;
+    height: 630px;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.sliderNav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 50px;
+    height: 80px;
+
+    background-color: rgba(94, 50, 50, 0.8);
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sliderNav.left {
+    left: 20px;
+}
+.sliderNav.right {
+    right: 20px;
+}
+
+.sliderNav img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.sliderNav:hover{
+    background-color: rgba(148, 87, 87, 0.8) ;
+    transition: 0.5s;
+}
+.sliderNav:active{
+    transition: .5s;
+    transform:  translateY(-50%) scale(.85);
 }

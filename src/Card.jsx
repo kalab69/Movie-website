@@ -4,7 +4,7 @@ function Card(props) {
         <h2>{props.title}</h2>
         <div className="movieInfo">
             <span>{new Date(props.year).getFullYear()}</span>
-            <span>⭐{props.rating.toFixed(2)}</span>
+            <span>⭐{props.rating.toFixed(1)}</span>
         </div>
 
     </div>)
