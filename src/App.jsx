@@ -3,7 +3,7 @@ import SliderLoader from './SliderLoader'
 import { useState, useEffect } from 'react'
 import NavBar from './NavBar';
 const ImageUrl = `https://image.tmdb.org/t/p/w500`;
-const SearchUrl = `https://api.themoviedb.org/3/search/movie?api_key=18fff5e1b57ed556bacc51cd41ead165&query=`;
+const SearchUrl = `https://api.themoviedb.org/3/search/multi?api_key=18fff5e1b57ed556bacc51cd41ead165&query=`;
 function App() {
     const [movies, setmovies] = useState([]);
     const [count, setcount] = useState(1);
@@ -42,51 +42,51 @@ function App() {
 
         {
 
-            (search.trim()) ? 
-            
-            (searchResults.length==0)?<h1 className="noResults">Could not find Movie "{search}"</h1>:
-            (<div className="container">
-                {   
-                searchResults.map(movie => (
-                    <Card
-                        key={movie.id}
-                        image={ImageUrl + movie.poster_path}
-                        title={movie.title}
-                        year={movie.release_date}
-                        rating={movie.vote_average}
-                    />
-                ))
-                
-                
-                }
-        
-            </div>
+            (search.trim()) ?
 
-            ) : 
-
-            <div className="mainBody">
-            <SliderLoader />
-            <div className="container">
-                {movies.map((movie) => (
+                (searchResults.length == 0) ? <h1 className="noResults">Could not find Movie "{search}"</h1> :
+                    (<div className="container">
+                        {
+                            searchResults.map(movie => (
+                                <Card key={movie.id} image={ImageUrl + movie.poster_path}
+                                title={movie.media_type === "movie" ? movie.title : movie.name}
+                                year={movie.media_type === "movie" ? movie.release_date : movie.first_air_date}
+                                rating={movie.vote_average}></Card>
+                            ))
 
 
-                    <Card key={movie.id} image={ImageUrl + movie.poster_path} title={movie.title} year={movie.release_date} rating={movie.vote_average}></Card>
+                        }
 
-                ))}
-            </div>
-            <div className="pageControl">
-                <button onClick={() => {
-                    if (count != 1) { setcount(count - 1) }
-                }}><img src="left.png"></img></button>
-                <button onClick={() => setcount(count + 1)}><img src="right.png"></img></button>
-            </div>
-        </div>
-         
-        
+                    </div>
+
+                    ) :
+
+                <div className="mainBody">
+                    <SliderLoader />
+                    <div className="container">
+                        {movies.map((movie) => (
+
+
+                            <Card key={movie.id} image={ImageUrl + movie.poster_path}
+                                title={movie.title}
+                                year={movie.release_date}
+                                rating={movie.vote_average}></Card>
+
+                        ))}
+                    </div>
+                    <div className="pageControl">
+                        <button onClick={() => {
+                            if (count != 1) { setcount(count - 1) }
+                        }}><img src="left.png"></img></button>
+                        <button onClick={() => setcount(count + 1)}><img src="right.png"></img></button>
+                    </div>
+                </div>
+
+
         }
 
 
-        
+
     </>)
 
 }
