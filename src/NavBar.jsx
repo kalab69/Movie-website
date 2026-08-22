@@ -1,19 +1,19 @@
-function NavBar({ searchMovie, search }) {
+function NavBar({ displayMovies, displayTv, searchMovie, search }) {
 
 
 
     return (<div className="navContainer"><div className="navBar">
-        <a className="logo">
+        <a href="http://localhost:5173/" className="logo">
             <img src="icon.png"></img>
         </a>
-        <button>Movies</button>
-        <button>Tv Shows</button>
+        <button id="movieBtn" onClick={displayMovies}>Movies</button>
+        <button id="tvBtn" onClick={displayTv}>Tv Shows</button>
         <button>Generes</button>
         <div className="searchBox">
             <img src="search.png " alt="serch"></img>
             <input type="text"
-                          onChange={searchMovie}
-                                     value = {search}></input>
+                onChange={searchMovie}
+                value={search}></input>
         </div>
     </div></div>)
 }
