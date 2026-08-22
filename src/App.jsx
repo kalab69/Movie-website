@@ -47,7 +47,7 @@ function App() {
                 (searchResults.length == 0) ? <h1 className="noResults">Could not find Movie "{search}"</h1> :
                     (<div className="container">
                         {
-                            searchResults.map(movie => (
+                            searchResults.filter(movie => movie.poster_path).map(movie => (
                                 <Card key={movie.id} image={ImageUrl + movie.poster_path}
                                 title={movie.media_type === "movie" ? movie.title : movie.name}
                                 year={movie.media_type === "movie" ? movie.release_date : movie.first_air_date}
