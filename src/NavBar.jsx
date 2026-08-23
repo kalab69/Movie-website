@@ -1,4 +1,4 @@
-function NavBar({ displayMovies, displayTv, searchMovie, search }) {
+function NavBar({ filterGenre, displayMovies, displayTv, searchMovie, search }) {
 
 
 
@@ -11,19 +11,15 @@ function NavBar({ displayMovies, displayTv, searchMovie, search }) {
         <div className="genreMenu">
             <button className="genreBtn">Generes</button>
             <div className="genres">
-                <button>Action</button>
-                <button>Adventure</button>
-                <button>Anmation</button>
-                <button>Comedy</button>
-                <button>Crime</button>
-                <button>Documentary</button>
-                <button>Drama</button>
-                <button>Family</button>
-                <button>History</button>
-                <button>Horror</button>
-                <button>Mystery</button>
-                <button>Romance</button>
-                <button>SIFY</button>
+                <button onClick={() => filterGenre(10759)}>Action & Adventure</button>
+                <button onClick={() => filterGenre(16)}>Animation</button>
+                <button onClick={() => filterGenre(35)}>Comedy</button>
+                <button onClick={() => filterGenre(80)}>Crime</button>
+                <button onClick={() => filterGenre(99)}>Documentary</button>
+                <button onClick={() => filterGenre(18)}>Drama</button>
+                <button onClick={() => filterGenre(10751)}>Family</button>
+                <button onClick={() => filterGenre(9648)}>Mystery</button>
+                <button onClick={() => filterGenre(37)}>Western</button>
             </div></div>
         <div className="searchBox">
             <img src="search.png " alt="serch"></img>

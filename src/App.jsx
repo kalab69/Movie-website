@@ -10,16 +10,15 @@ function App() {
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [type, setType] = useState("movie");
+    const [genre, setGenre] = useState("");
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
-        console.log("TYPE:", type);
-        const Api_URL = `https://api.themoviedb.org/3/discover/${type}?api_key=18fff5e1b57ed556bacc51cd41ead165&include_adult=false&page=${count}`;
-        console.log("URL:", Api_URL);
+        const Api_URL = `https://api.themoviedb.org/3/discover/${type}?${genre}api_key=18fff5e1b57ed556bacc51cd41ead165&include_adult=false&page=${count}`;
         fetch(Api_URL).
             then(response => response.json()
-                .then(data => { console.log("API RESPONSE:", data); setresults(data.results) })
+                .then(data => { setresults(data.results) })
                 .catch(e => { console.error(e) }))
-    }, [count, type]);
+    }, [count, type, genre]);
 
     useEffect(() => {
         if (!search.trim()) {
@@ -41,19 +40,33 @@ function App() {
     const displayMovies = () => {
         setcount(1);
         setType("movie")
+        setGenre("")
         document.getElementById("movieBtn").style.borderColor = "blue";
         document.getElementById("tvBtn").style.borderColor = "rgb(79, 72, 72)";
     }
     const displayTv = () => {
         setcount(1);
         setType("tv")
+        setGenre("")
         document.getElementById("movieBtn").style.borderColor = "rgb(79, 72, 72)";
         document.getElementById("tvBtn").style.borderColor = "blue";
+    }
+    function filterGenre(id) {
+        setcount(1);
+        // check if it movie if so make id to adventure of movie which is 12
+        if (type == "movie" && id == 10759) {
+            setGenre(`with_genres=${12}&`);
+            return;
+        }
+        setGenre(`with_genres=${id}&`);
     }
 
 
     return (<>
-        <NavBar searchMovie={searchMovie} displayTv={displayTv} displayMovies={displayMovies} />
+        <NavBar searchMovie={searchMovie}
+            displayTv={displayTv}
+            displayMovies={displayMovies}
+            filterGenre={filterGenre} />
 
         {
 
