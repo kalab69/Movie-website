@@ -321,3 +321,37 @@ body {
 .noResults {
     margin-top: 80px;
 }
+/*
+   the genre menu and options
+*/
+.genreMenu {
+    position: relative;
+    display: inline-block;
+}
+.genres {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    background-color: #222;
+    padding: 10px;
+    width: 200px;
+}
+.genreMenu:hover .genres {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.genres button {
+    padding: 8px;
+    border: none;
+    background: transparent;
+    color: white;
+    text-align: left;
+    cursor: pointer;
+}
+
+.genres button:hover {
+    background-color: rgba(0, 0, 0, 0.821);
+}

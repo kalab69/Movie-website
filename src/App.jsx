@@ -59,7 +59,7 @@ function App() {
 
             (search.trim()) ?
 
-                (searchResults.length == 0) ? <h1 className="noResults">Could not find Movie "{search}"</h1> :
+                (searchResults.length == 0) ? <h1 className="noResults">Could not find Movie  / Tv Show"{search}"</h1> :
                     (<div className="container">
                         {
                             searchResults.filter(movie => movie.poster_path).map(movie => (

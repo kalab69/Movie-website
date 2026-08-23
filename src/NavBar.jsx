@@ -8,7 +8,23 @@ function NavBar({ displayMovies, displayTv, searchMovie, search }) {
         </a>
         <button id="movieBtn" onClick={displayMovies}>Movies</button>
         <button id="tvBtn" onClick={displayTv}>Tv Shows</button>
-        <button>Generes</button>
+        <div className="genreMenu">
+            <button className="genreBtn">Generes</button>
+            <div className="genres">
+                <button>Action</button>
+                <button>Adventure</button>
+                <button>Anmation</button>
+                <button>Comedy</button>
+                <button>Crime</button>
+                <button>Documentary</button>
+                <button>Drama</button>
+                <button>Family</button>
+                <button>History</button>
+                <button>Horror</button>
+                <button>Mystery</button>
+                <button>Romance</button>
+                <button>SIFY</button>
+            </div></div>
         <div className="searchBox">
             <img src="search.png " alt="serch"></img>
             <input type="text"
