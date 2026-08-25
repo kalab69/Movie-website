@@ -45,15 +45,6 @@ body {
     padding: 20px;
 }
 
-.pageControl button {
-    background-color: rgb(245, 240, 240);
-    cursor: pointer;
-    margin-left: 60px;
-    margin-right: 60px;
-    border-radius: 100%;
-    border: none;
-    padding: 5px;
-}
 
 .pageControl img {
     width: 40px;

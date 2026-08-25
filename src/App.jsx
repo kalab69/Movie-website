@@ -109,6 +109,7 @@ function App() {
     function filterGenre(id) {
         setcount(1);
         setresults([]);
+        window.scrollTo({top: 0 , behavior :"smooth"})
         // check if it movie if so make id to adventure of movie which is 12
         if (type == "movie" && id == 10759) {
             setGenre(`with_genres=${12}&`);
