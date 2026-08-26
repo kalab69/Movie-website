@@ -25,7 +25,8 @@ function NavBar({ filterGenre, displayMovies, displayTv, searchMovie, search }) 
             <img src="search.png " alt="serch"></img>
             <input type="text"
                 onChange={searchMovie}
-                value={search}></input>
+                value={search}
+                placeholder="Search for Movie or Tv ..."></input>
         </div>
     </div></div>)
 }

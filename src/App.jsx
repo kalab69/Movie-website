@@ -32,7 +32,7 @@ function App() {
                 console.error(e);
             }
             finally {
-                isLoading(false);
+                setIsLoading(false);
             }
 
         }
