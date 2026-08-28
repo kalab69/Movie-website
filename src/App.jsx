@@ -155,7 +155,8 @@ function App() {
                             <Card key={movie.id} image={ImageUrl + movie.poster_path}
                                 title={type === "movie" ? movie.title : movie.name}
                                 year={type === "movie" ? movie.release_date : movie.first_air_date}
-                                rating={movie.vote_average}></Card>
+                                rating={movie.vote_average}
+                                details={movie.overview}></Card>
 
                         ))}
                     </div>
