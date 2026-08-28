@@ -9,7 +9,6 @@
 }
 
 .card:hover {
-    background-color: rgba(41, 29, 29, 0.73);
     transform: translatey(-2px);
     transition: 1s;
 }
@@ -345,4 +344,31 @@ body {
 
 .genres button:hover {
     background-color: rgba(0, 0, 0, 0.821);
+}
+.card {
+    position: relative;
+}
+
+.cardDetail {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    
+    background: rgba(0, 0, 0);
+    color: white;
+    padding: 15px;
+    box-sizing: border-box;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    max-height: 150px;
+    min-height: 150px;
+
+}
+
+.card:hover .cardDetail {
+    opacity: 1;
+    visibility: visible;
 }

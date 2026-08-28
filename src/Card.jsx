@@ -26,6 +26,7 @@ function Card(props) {
             </span>
         </div>
         <div className = "cardDetail">
+            <h2>{props.title}</h2>
             <p>{props.details}</p>
         </div>
 
