@@ -170,9 +170,12 @@ function App() {
                         >
                             {
                                 isLoading &&
-                                <p style={{ textAlign: "center" }}>
-                                    Loading more movies...
-                                </p>
+                                <div className = "loaderContaner">
+
+                                     <div className="loader">
+                                </div>
+                                </div>
+                               
                             }
 
                         </div>

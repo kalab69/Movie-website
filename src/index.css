@@ -372,3 +372,25 @@ body {
     opacity: 1;
     visibility: visible;
 }
+.loader {
+    width: 30px;
+    height: 30px;
+    border: 5px solid #ddd;
+    border-top: 5px solid blue;
+    border-radius: 50%;
+
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+.loaderContaner{
+    display: flex;
+    justify-content: center;
+}
