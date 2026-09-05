@@ -1,13 +1,15 @@
+import { Link, NavLink } from "react-router-dom"
+
 function NavBar({ filterGenre, displayMovies, displayTv, searchMovie, search }) {
 
 
 
     return (<div className="navContainer"><div className="navBar">
-        <a href="http://localhost:5173/" className="logo">
+        <Link to="http://localhost:5173/" className="logo">
             <img src="icon.png"></img>
-        </a>
-        <button id="movieBtn" onClick={displayMovies}>Movies</button>
-        <button id="tvBtn" onClick={displayTv}>Tv Shows</button>
+        </Link>
+        <NavLink to = "/">Movies</NavLink>
+        <NavLink to = "/tv">TV Shows</NavLink>
         <div className="genreMenu">
             <button className="genreBtn">Generes</button>
             <div className="genres">
