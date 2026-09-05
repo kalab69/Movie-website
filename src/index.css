@@ -228,7 +228,7 @@ body {
 
 .logo:hover {
     transition: 0.5s;
-    transform: scale(1.3);
+    transform: scale(1.09);
 
 }
 
@@ -298,6 +298,23 @@ body {
     color: white;
     cursor: pointer;
 }
+
+#movieBtn{
+     background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgb(79, 72, 72);
+    border-radius: 25px;
+    font-size: 1.2em;
+    padding: 5px;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+#movieBtn.isActive{
+     
+    border-color: rgb(88, 88, 255);
+}
+
+
 
 .navBar button:hover {
     background: rgba(255, 255, 255, 0.1);
