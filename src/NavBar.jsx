@@ -8,7 +8,7 @@ function NavBar({ filterGenre, displayMovies, displayTv, searchMovie, search }) 
         <Link to="http://localhost:5173/" className="logo">
             <img src="icon.png"></img>
         </Link>
-        <NavLink to = "/">Movies</NavLink>
+        <NavLink to = "/movies">Movies</NavLink>
         <NavLink to = "/tv">TV Shows</NavLink>
         <div className="genreMenu">
             <button className="genreBtn">Generes</button>
