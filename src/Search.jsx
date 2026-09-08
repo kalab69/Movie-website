@@ -1,11 +1,19 @@
 import Card from './Card'
 import { useState, useEffect, useRef } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom';
 const ImageUrl = `https://image.tmdb.org/t/p/w500`;
 const SearchUrl = `https://api.themoviedb.org/3/search/multi?api_key=18fff5e1b57ed556bacc51cd41ead165&query=`;
 
 function Search() {
-    const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
+    const search = searchParams.get('q')||"";
+    useEffect(()=>{
+        if(!search.trim()){
+            navigate('/');
+        }
+    },[navigate,search])
 
     useEffect(() => {
         if (!search.trim()) {

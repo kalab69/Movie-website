@@ -299,8 +299,8 @@ body {
     cursor: pointer;
 }
 
-#movieBtn{
-     background: rgba(255, 255, 255, 0.03);
+#movieBtn {
+    background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgb(79, 72, 72);
     border-radius: 25px;
     font-size: 1.2em;
@@ -309,12 +309,11 @@ body {
     cursor: pointer;
     text-decoration: none;
 }
-#movieBtn.isActive{
-     
+
+#movieBtn.isActive {
+
     border-color: rgb(88, 88, 255);
 }
-
-
 
 .navBar button:hover {
     background: rgba(255, 255, 255, 0.1);
@@ -328,6 +327,7 @@ body {
 .noResults {
     margin-top: 80px;
 }
+
 /*
    the genre menu and options
 */
@@ -335,6 +335,7 @@ body {
     position: relative;
     display: inline-block;
 }
+
 .genres {
     display: none;
     position: absolute;
@@ -345,11 +346,13 @@ body {
     padding: 10px;
     width: 200px;
 }
+
 .genreMenu:hover .genres {
     display: flex;
     flex-direction: column;
     background-color: rgba(0, 0, 0, 0.7);
 }
+
 .genres button {
     padding: 8px;
     border: none;
@@ -362,6 +365,7 @@ body {
 .genres button:hover {
     background-color: rgba(0, 0, 0, 0.821);
 }
+
 .card {
     position: relative;
 }
@@ -371,7 +375,7 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    
+
     background: rgba(0, 0, 0);
     color: white;
     padding: 15px;
@@ -389,6 +393,7 @@ body {
     opacity: 1;
     visibility: visible;
 }
+
 .loader {
     width: 30px;
     height: 30px;
@@ -398,6 +403,7 @@ body {
 
     animation: spin 1s linear infinite;
 }
+
 @keyframes spin {
     from {
         transform: rotate(0deg);
@@ -407,7 +413,8 @@ body {
         transform: rotate(360deg);
     }
 }
-.loaderContaner{
+
+.loaderContaner {
     display: flex;
     justify-content: center;
 }

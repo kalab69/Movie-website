@@ -1,8 +1,22 @@
 import { Link, NavLink } from "react-router-dom"
+import { useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 
-function NavBar({ filterGenre, displayMovies, displayTv, searchMovie, search }) {
+function NavBar() {
+    const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const location = useLocation();
 
-
+    const currentSearchValue = location.pathname === "/search"
+        ? (searchParams.get('q') || "")
+        : "";
+    function searchMovie(event) {
+        const value = event.target.value;
+        if (value.trim() === "") {
+            navigate("/");
+        } else {
+            navigate(`/search?q=${encodeURIComponent(value)}`);
+        }
+    }
 
     return (<div className="navContainer"><div className="navBar">
         <Link to="http://localhost:5173/" className="logo">
@@ -27,7 +41,7 @@ function NavBar({ filterGenre, displayMovies, displayTv, searchMovie, search }) 
             <img src="search.png " alt="serch"></img>
             <input type="text"
                 onChange={searchMovie}
-                value={search}
+                value={currentSearchValue}
                 placeholder="Search for Movie or Tv ..."></input>
         </div>
     </div></div>)
