@@ -77,7 +77,7 @@ function Tv() {
 
 
         <div className="mainBody">
-            <SliderLoader />
+            <SliderLoader type={"tv"} />
             <div className="container">
                 {results.filter(tv => tv.poster_path).map((tv) => (
 

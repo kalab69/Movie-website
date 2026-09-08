@@ -84,7 +84,7 @@ function Movies(){
 
     return (<>
                 <div className="mainBody">
-                    <SliderLoader />
+                    <SliderLoader type={"movie"}/>
                     <div className="container">
                         {results.filter(movie => movie.poster_path).map((movie) => (
 

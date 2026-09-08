@@ -1,8 +1,8 @@
 import Slider from './Slider'
 import { useState, useEffect } from 'react'
-const Api_path = "https://api.themoviedb.org/3/trending/movie/week?api_key=18fff5e1b57ed556bacc51cd41ead165"
 const ImageUrl = `https://image.tmdb.org/t/p/original`;
-function SliderLoader() {
+function SliderLoader(props) {
+    const Api_path = `https://api.themoviedb.org/3/trending/${props.type}/week?api_key=18fff5e1b57ed556bacc51cd41ead165`
     const [movies, setmovies] = useState([]);
     const [slide, setSlide] = useState(0);
     useEffect(() => {
@@ -59,7 +59,7 @@ function SliderLoader() {
 
                 <Slider key={movies[slide].id}
                     image={ImageUrl + movies[slide].backdrop_path}
-                    title={movies[slide].title}
+                    title={(props.type=="movie")?movies[slide].title : movies[slide].name}
                     year={movies[slide].release_date}
                     rating={movies[slide].vote_average}
                     description={movies[slide].overview}
