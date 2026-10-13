@@ -416,3 +416,56 @@ body {
     display: flex;
     justify-content: center;
 }
+/*css for movie page*/
+.moviePage {
+  margin-top: 50px;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #000;
+  isolation: isolate;
+}
+
+.movieBackground {
+  position: absolute;
+  inset: -20px;
+  z-index: -1;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: blur(8px);
+  transform: scale(1.05);
+}
+
+/* Fade the image to black on all edges */
+.moviePage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(to right, #000 0%, transparent 35%, transparent 65%, #000 100%),
+    linear-gradient(to bottom, #000 0%, transparent 40%, #000 100%);
+}
+.backBtn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+
+  padding: 10px 18px;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.backBtn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}

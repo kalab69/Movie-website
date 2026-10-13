@@ -66,7 +66,7 @@ function Movies() {
     return (
         <div className="mainBody">
             <SliderLoader type={"movie"} />
-            <div className="container" style={{ cursor: "pointer" }}>
+            <div className="container" >
                 {results.filter(movie => movie.poster_path).map((movie) => (
                     <Card 
                         key={movie.id} 

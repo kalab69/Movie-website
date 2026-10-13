@@ -36,15 +36,21 @@ function MovieDetails() {
     }
 
     return (
-        <div className="mainBody">
+        <div className="moviePage">
+            <div
+                className="movieBackground"
+                style={{
+                    backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
+                }}
+            />
             {/* navigate(-1) takes the user back to the previous page seamlessly */}
             <button onClick={() => navigate(-1)} className="backBtn" style={{ margin: "20px" }}>
-                ⬅ Back
+                ⬅ back
             </button>
             <div className="detailsContent" style={{ display: "flex", padding: "20px", gap: "30px" }}>
-                <img 
-                    src={movie.poster_path ? ImageUrl + movie.poster_path : "placeholder.png"} 
-                    alt={movie.title} 
+                <img
+                    src={movie.poster_path ? ImageUrl + movie.poster_path : "placeholder.png"}
+                    alt={movie.title}
                     style={{ borderRadius: "10px", maxHeight: "500px" }}
                 />
                 <div className="textInfo" style={{ color: "white" }}>
