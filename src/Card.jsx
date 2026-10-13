@@ -11,7 +11,9 @@ function Card(props) {
                 else{
                     color = "rgb(81, 255, 0)"
                 }
-    return (<div className="card">
+    return (<div className="card"
+     onClick = {props.onClick}>
+       
         <img src={props.image} alt={props.title}></img>
         <h2>{props.title}</h2>
         <div className="movieInfo">

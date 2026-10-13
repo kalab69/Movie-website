@@ -1,13 +1,14 @@
 import Card from './Card'
 import SliderLoader from './SliderLoader'
 import { useState, useEffect, useRef } from 'react'
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams , useNavigate } from 'react-router-dom';
 
 const ImageUrl = `https://image.tmdb.org/t/p/w500`;
 
 function Tv() {
     const [searchParams] = useSearchParams();
     const genreId = searchParams.get("genre");
+    const navigate = useNavigate();
 
     const [results, setResults] = useState([]);
     const [count, setCount] = useState(1);
@@ -17,7 +18,6 @@ function Tv() {
     const genreQuery = genreId ? `with_genres=${genreId}&` : "";
     const Api_URL = `https://api.themoviedb.org/3/discover/tv?${genreQuery}api_key=18fff5e1b57ed556bacc51cd41ead165&include_adult=false&page=${count}`;
 
-    // Reset list and count whenever the genre query param changes
     useEffect(() => {
         setCount(1);
         setResults([]);
@@ -77,6 +77,7 @@ function Tv() {
                         year={tv.first_air_date}
                         rating={tv.vote_average}
                         details={tv.overview}
+                        onClick = {()=>navigate(`/movies/${tv.id}`)}
                     />
                 ))}
             </div>

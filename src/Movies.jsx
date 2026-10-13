@@ -1,12 +1,13 @@
 import Card from './Card'
 import SliderLoader from './SliderLoader'
 import { useState, useEffect, useRef } from 'react'
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const ImageUrl = `https://image.tmdb.org/t/p/w500`;
 
 function Movies() {
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate(); // Initialize navigate
     const genreId = searchParams.get("genre");
 
     const [count, setCount] = useState(1);
@@ -14,13 +15,10 @@ function Movies() {
     const observerTarget = useRef(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    // Map TMDB genre ID 10759 (Action & Adventure) to movie adventure ID 12
     const activeGenreId = genreId === "10759" ? "12" : genreId;
     const genreQuery = activeGenreId ? `with_genres=${activeGenreId}&` : "";
-    
     const Api_URL = `https://api.themoviedb.org/3/discover/movie?${genreQuery}api_key=18fff5e1b57ed556bacc51cd41ead165&include_adult=false&page=${count}`;
 
-    // Reset list and count whenever the genre query param changes
     useEffect(() => {
         setCount(1);
         setResults([]);
@@ -33,11 +31,7 @@ function Movies() {
             try {
                 const response = await fetch(Api_URL);
                 const data = await response.json();
-
-                setResults(prevResults => [
-                    ...prevResults,
-                    ...(data.results || [])
-                ]);
+                setResults(prevResults => [...prevResults, ...(data.results || [])]);
             } catch (e) {
                 console.error(e);
             } finally {
@@ -50,22 +44,14 @@ function Movies() {
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
-                const target = entries[0];
-                if (target.isIntersecting && !isLoading) {
+                if (entries[0].isIntersecting && !isLoading) {
                     setCount(prevCount => prevCount + 1);
                 }
             },
             { rootMargin: "300px" }
         );
-
-        if (observerTarget.current) {
-            observer.observe(observerTarget.current);
-        }
-        return () => {
-            if (observerTarget.current) {
-                observer.unobserve(observerTarget.current);
-            }
-        };
+        if (observerTarget.current) observer.observe(observerTarget.current);
+        return () => { if (observerTarget.current) observer.unobserve(observerTarget.current); };
     }, [isLoading]);
 
     return (
@@ -80,14 +66,13 @@ function Movies() {
                         year={movie.release_date}
                         rating={movie.vote_average}
                         details={movie.overview}
+                        // Navigate to the dynamic route when clicked
+                        onClick={() => navigate(`/movies/${movie.id}`)}
                     />
                 ))}
             </div>
 
-            <div
-                ref={observerTarget}
-                style={{ height: "20px", margin: "20px" }}
-            >
+            <div ref={observerTarget} style={{ height: "20px", margin: "20px" }}>
                 {isLoading && (
                     <div className="loaderContaner">
                         <div className="loader"></div>
@@ -97,4 +82,4 @@ function Movies() {
         </div>
     )
 }
-export default Movies
+export default Movies;
