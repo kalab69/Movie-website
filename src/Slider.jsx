@@ -12,16 +12,17 @@ function Slider(props) {
                     color = "rgb(81, 255, 0)"
                 }
     return (
-        <div className="slider">
+        <div className="slider" style={{ cursor: "pointer" }}>
+            
             <img src={props.image} alt={props.title}></img>
-            <div className="movieDetails">
+            <div className="movieDetails" onClick = {props.onClick}>
                 <h1>{props.title}</h1>
                 <p>{props.description}</p>
                 <span className="span1">{new Date(props.year).getFullYear()}</span>
                 <span className="span2" style={{color:color}}>⭐{props.rating.toFixed(1)}</span>
                 <br></br>
                 <button>
-                    <img src="/play.png" alt="Play" />
+                    <img src="/play.png" alt="Play"/>
                     Play Now
                 </button>
                 

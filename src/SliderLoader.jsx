@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Slider from './Slider'
 import { useState, useEffect } from 'react'
 const ImageUrl = `https://image.tmdb.org/t/p/original`;
@@ -5,6 +6,7 @@ function SliderLoader(props) {
     const Api_path = `https://api.themoviedb.org/3/trending/${props.type}/week?api_key=18fff5e1b57ed556bacc51cd41ead165`
     const [movies, setmovies] = useState([]);
     const [slide, setSlide] = useState(0);
+    const navigate = useNavigate();
     useEffect(() => {
 
         fetch(Api_path).then(response => response.json()
@@ -65,6 +67,7 @@ function SliderLoader(props) {
                     description={movies[slide].overview}
                     nextSlide = {nextSlide}
                     privSlide = {privSlide}
+                    onClick={()=>navigate(`/movies/${movies[slide].id}`)}
                     ></Slider>
 
             }

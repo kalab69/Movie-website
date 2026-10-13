@@ -43,6 +43,7 @@ function Search() {
                                     year={movie.media_type === "movie" ? movie.release_date : movie.first_air_date}
                                     rating={movie.vote_average}
                                     details={movie.overview}
+                                    onClick = {()=>navigate(`/movies/${movie.id}`)}
                                     ></Card>
                             ))
 
