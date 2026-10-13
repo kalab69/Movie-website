@@ -1,14 +1,28 @@
 import Card from './Card'
 import SliderLoader from './SliderLoader'
 import { useState, useEffect, useRef } from 'react'
+import { useSearchParams } from 'react-router-dom';
+
 const ImageUrl = `https://image.tmdb.org/t/p/w500`;
+
 function Tv() {
-    const [results, setresults] = useState([]);
-    const [count, setcount] = useState(1);
-    const [genre, setGenre] = useState("");
+    const [searchParams] = useSearchParams();
+    const genreId = searchParams.get("genre");
+
+    const [results, setResults] = useState([]);
+    const [count, setCount] = useState(1);
     const observerTarget = useRef(null);
     const [isLoading, setIsLoading] = useState(false);
-    const Api_URL = `https://api.themoviedb.org/3/discover/tv?${genre}api_key=18fff5e1b57ed556bacc51cd41ead165&include_adult=false&page=${count}`;
+
+    const genreQuery = genreId ? `with_genres=${genreId}&` : "";
+    const Api_URL = `https://api.themoviedb.org/3/discover/tv?${genreQuery}api_key=18fff5e1b57ed556bacc51cd41ead165&include_adult=false&page=${count}`;
+
+    // Reset list and count whenever the genre query param changes
+    useEffect(() => {
+        setCount(1);
+        setResults([]);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }, [genreId]);
 
     useEffect(() => {
         const fetchTv = async () => {
@@ -17,43 +31,30 @@ function Tv() {
                 const response = await fetch(Api_URL);
                 const data = await response.json();
 
-                setresults(prevResults => [
+                setResults(prevResults => [
                     ...prevResults,
-                    ...data.results
+                    ...(data.results || [])
                 ]);
             } catch (e) {
-
                 console.error(e);
-            }
-            finally {
+            } finally {
                 setIsLoading(false);
             }
-
         }
         fetchTv();
-    }, [count, genre]);
+    }, [count, genreId]);
 
     useEffect(() => {
-
         const observer = new IntersectionObserver(
             (entries) => {
-
                 const target = entries[0];
-
-
-                if (
-                    target.isIntersecting &&
-                    !isLoading) {
-                    setcount(prevCount => prevCount + 1);
+                if (target.isIntersecting && !isLoading) {
+                    setCount(prevCount => prevCount + 1);
                 }
-
             },
-            {
-                rootMargin: "300px"
-            }
+            { rootMargin: "300px" }
         );
 
-        // Start observing our target element
         if (observerTarget.current) {
             observer.observe(observerTarget.current);
         }
@@ -62,56 +63,35 @@ function Tv() {
                 observer.unobserve(observerTarget.current);
             }
         };
+    }, [isLoading]);
 
-    }, [isLoading, count]);
-
-    function filterGenre(id) {
-        setcount(1);
-        setresults([]);
-        window.scrollTo({ top: 0, behavior: "smooth" })
-        setGenre(`with_genres=${id}&`)
-    }
-
-
-    return (<>
-
-
+    return (
         <div className="mainBody">
             <SliderLoader type={"tv"} />
             <div className="container">
                 {results.filter(tv => tv.poster_path).map((tv) => (
-
-
-                    <Card key={tv.id} image={ImageUrl + tv.poster_path}
+                    <Card 
+                        key={tv.id} 
+                        image={ImageUrl + tv.poster_path}
                         title={tv.name}
                         year={tv.first_air_date}
                         rating={tv.vote_average}
-                        details={tv.overview}></Card>
-
+                        details={tv.overview}
+                    />
                 ))}
             </div>
 
             <div
                 ref={observerTarget}
-                style={{
-                    height: "20px",
-                    margin: "20px"
-                }}
+                style={{ height: "20px", margin: "20px" }}
             >
-                {
-                    isLoading &&
+                {isLoading && (
                     <div className="loaderContaner">
-
-                        <div className="loader">
-                        </div>
+                        <div className="loader"></div>
                     </div>
-
-                }
-
+                )}
             </div>
-
         </div>
-   </>)
-
+    )
 }
 export default Tv

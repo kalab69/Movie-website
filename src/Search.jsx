@@ -29,10 +29,6 @@ function Search() {
     }, [search]);
 
 
-    const searchMovie = (event) => {
-        setSearch(event.target.value);
-    }
-
     return (<>
         
 
