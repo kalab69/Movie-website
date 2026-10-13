@@ -28,13 +28,18 @@ function Tv() {
         const fetchTv = async () => {
             setIsLoading(true);
             try {
-                const response = await fetch(Api_URL);
+               const response = await fetch(Api_URL);
                 const data = await response.json();
-
-                setResults(prevResults => [
-                    ...prevResults,
-                    ...(data.results || [])
-                ]);
+                
+                setResults(prevResults => {
+                    // Create a Set of existing movie IDs to check for duplicates
+                    const existingIds = new Set(prevResults.map(movie => movie.id));
+                    
+                    // Only keep new movies that aren't already in the list
+                    const uniqueNewMovies = (data.results || []).filter(movie => !existingIds.has(movie.id));
+                    
+                    return [...prevResults, ...uniqueNewMovies];
+                });
             } catch (e) {
                 console.error(e);
             } finally {
