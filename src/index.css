@@ -651,6 +651,11 @@ body {
     gap: 20px;
     overflow-x: auto;
     padding-bottom: 15px;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
 }
 
 .castScrollContainer::-webkit-scrollbar {

@@ -62,7 +62,7 @@ function MovieDetails() {
 
     const castList = movie.credits?.cast
         ?.filter(actor => actor.profile_path)
-        ?.slice(0, 9) || [];
+        ?.slice(0, 10) || [];
 
     return (
         <div className="movieContainer">
