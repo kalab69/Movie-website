@@ -54,6 +54,9 @@ function SliderLoader(props) {
     if (movies.length === 0) {
         return <p>Loading...</p>
     }
+     function selectPathToNav(movieId,mediaType){
+        (mediaType=="movie")?navigate(`/movies/${movieId}`): navigate(`/tv/${movieId}`);
+    }
 
     return (
         <>
@@ -67,7 +70,7 @@ function SliderLoader(props) {
                     description={movies[slide].overview}
                     nextSlide = {nextSlide}
                     privSlide = {privSlide}
-                    onClick={()=>navigate(`/movies/${movies[slide].id}`)}
+                    onClick = {()=>selectPathToNav(movies[slide].id,props.type)}
                     ></Slider>
 
             }
