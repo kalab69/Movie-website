@@ -82,7 +82,7 @@ function Tv() {
                         year={tv.first_air_date}
                         rating={tv.vote_average}
                         details={tv.overview}
-                        onClick = {()=>navigate(`/movies/${tv.id}`)}
+                        onClick = {()=>navigate(`/Tv/${tv.id}`)}
                     />
                 ))}
             </div>

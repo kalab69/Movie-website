@@ -28,6 +28,9 @@ function Search() {
 
     }, [search]);
 
+    function selectPathToNav(movieId,mediaType){
+        (mediaType=="movie")?navigate(`/movies/${movieId}`): navigate(`/tv/${movieId}`);
+    }
 
     return (<>
         
@@ -43,7 +46,7 @@ function Search() {
                                     year={movie.media_type === "movie" ? movie.release_date : movie.first_air_date}
                                     rating={movie.vote_average}
                                     details={movie.overview}
-                                    onClick = {()=>navigate(`/movies/${movie.id}`)}
+                                    onClick = {()=>selectPathToNav(movie.id,movie.media_type)}
                                     ></Card>
                             ))
 
