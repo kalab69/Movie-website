@@ -28,7 +28,7 @@ function TvDetails() {
     }, [id]);
 
     if (isLoading) {
-        return <div className="loaderContainer"><div className="loader"></div></div>;
+        return <div className="loaderContainer2"><div className="loader2"></div></div>;
     }
 
     if (!tv) {
