@@ -108,7 +108,7 @@ function MovieDetails() {
                     <div className="heroMeta">
                         <span>⭐ {movie.vote_average?.toFixed(1)}</span>
                         <span>{movie.release_date?.split("-")[0]}</span>
-                        <span>{movie.genres?.map(g => g.name).join(", ")}</span>
+                        <span>{movie.genres?.map(g => g.name).join("•")}</span>
                     </div>
                     <p className="heroOverview">{movie.overview}</p>
                     <div className="heroButtons">

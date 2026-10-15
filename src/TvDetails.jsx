@@ -14,6 +14,10 @@ function MovieDetails() {
     const [isMuted, setIsMuted] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
 
+    // --- NEW: Seasons & Episodes State ---
+    const [selectedSeason, setSelectedSeason] = useState(1);
+    const [episodes, setEpisodes] = useState([]);
+
     useEffect(() => {
         const fetchMovieDetails = async () => {
             setIsLoading(true);
@@ -25,7 +29,7 @@ function MovieDetails() {
                 const data = await response.json();
                 
                 setMovie(data);
-                document.title = data.name + '- vivo movies'
+                document.title = (data.name || data.title) + ' vivo movies';
 
                 const officialTrailer = data.videos?.results.find(
                     video => video.site === "YouTube" && (video.type === "Trailer" || video.type === "Teaser")
@@ -48,6 +52,21 @@ function MovieDetails() {
 
         fetchMovieDetails();
     }, [id]);
+
+    useEffect(() => {
+        if (!id) return;
+        
+        fetch(`https://api.themoviedb.org/3/tv/${id}/season/${selectedSeason}?api_key=${API_KEY}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.episodes) {
+                    setEpisodes(data.episodes);
+                } else {
+                    setEpisodes([]);
+                }
+            })
+            .catch(err => console.error("Failed to fetch episodes:", err));
+    }, [id, selectedSeason]);
 
     if (isLoading) {
         return <div className="loaderContainer2"><div className="loader2"></div></div>;
@@ -100,19 +119,19 @@ function MovieDetails() {
 
                 <div className="heroContent">
                     {logoUrl ? (
-                        <img src={logoUrl} alt={movie.title} className="movieLogoImage" />
+                        <img src={logoUrl} alt={movie.name || movie.title} className="movieLogoImage" />
                     ) : (
-                        <h1 className="heroTitle">{movie.title}</h1>
+                        <h1 className="heroTitle">{movie.name || movie.title}</h1>
                     )}
 
                     <div className="heroMeta">
                         <span>⭐ {movie.vote_average?.toFixed(1)}</span>
-                        <span>{movie.release_date?.split("-")[0]}</span>
-                        <span>{movie.genres?.map(g => g.name).join(", ")}</span>
+                        <span>{movie.first_air_date?.split("-")[0] || movie.release_date?.split("-")[0]}</span>
+                        <span>{movie.genres?.map(g => g.name).join("•")}</span>
                     </div>
                     <p className="heroOverview">{movie.overview}</p>
                     <div className="heroButtons">
-                        <button className="playNowBtn">▶ Play Movie</button>
+                        <button className="playNowBtn">▶ Play Show</button>
                     </div>
                 </div>
             </div>
@@ -135,6 +154,58 @@ function MovieDetails() {
                     </div>
                 </section>
 
+                {/* --- NEW: EPISODES & SEASONS SECTION --- */}
+                <section className="sectionBlock episodesSection">
+                    <div className="episodesHeader">
+                        <h2>Episodes</h2>
+                        <select 
+                            className="seasonDropdown" 
+                            value={selectedSeason} 
+                            onChange={(e) => setSelectedSeason(Number(e.target.value))}
+                        >
+                            {movie.seasons
+                                ?.filter(season => season.season_number > 0)
+                                .map(season => (
+                                    <option key={season.id} value={season.season_number}>
+                                        {season.name}
+                                    </option>
+                                ))
+                            }
+                        </select>
+                    </div>
+
+                    <div className="episodesList">
+                        {episodes.length > 0 ? (
+                            episodes.map(ep => (
+                                <div key={ep.id} className="episodeCard">
+                                    <div className="episodeImageWrapper">
+                                        <img 
+                                            src={ep.still_path ? `https://image.tmdb.org/t/p/w500${ep.still_path}` : "placeholder.png"} 
+                                            alt={ep.name} 
+                                        />
+                                        <div className="episodePlayOverlay">▶</div>
+                                    </div>
+                                    <div className="episodeInfo">
+                                        <div className="episodeTitleRow">
+                                            <h4>{ep.episode_number}. {ep.name}</h4>
+                                            <span className="episodeRuntime">{ep.runtime ? `${ep.runtime}m` : ""}</span>
+                                        </div>
+                                        <div className="episodeMeta">
+                                            <span>{ep.air_date || "TBA"}</span>
+                                            <span>⭐ {ep.vote_average ? ep.vote_average.toFixed(1) : "N/A"}</span>
+                                        </div>
+                                        <p className="episodeOverview">
+                                            {ep.overview || "No description available for this episode."}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="noEpisodesText">No episodes found for this season.</p>
+                        )}
+                    </div>
+                </section>
+
                 {recommendedMovies.length > 0 && (
                     <section className="sectionBlock">
                         <h2>Recommendations</h2>
@@ -143,11 +214,11 @@ function MovieDetails() {
                                 <Card 
                                     key={recMovie.id}
                                     image={recMovie.poster_path ? `https://image.tmdb.org/t/p/w500${recMovie.poster_path}` : "placeholder.png"}
-                                    title={recMovie.title}
-                                    year={recMovie.release_date}
+                                    title={recMovie.title || recMovie.name}
+                                    year={recMovie.release_date || recMovie.first_air_date}
                                     rating={recMovie.vote_average}
                                     details={recMovie.overview}
-                                    onClick={() => navigate(`/movies/${recMovie.id}`)}
+                                    onClick={() => navigate(`/tv/${recMovie.id}`)}
                                 />
                             ))}
                         </div>
