@@ -22,6 +22,7 @@ function Tv() {
         setCount(1);
         setResults([]);
         window.scrollTo({ top: 0, behavior: "smooth" });
+         document.title = ('Tvs' +  ' - Novimovies');
     }, [genreId]);
 
     useEffect(() => {

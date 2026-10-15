@@ -25,7 +25,7 @@ function MovieDetails() {
                 const data = await response.json();
                 
                 setMovie(data);
-                document.title = data.title + '- vivo movies'
+                document.title = data.title +  ' - Novimovies'
 
                 const officialTrailer = data.videos?.results.find(
                     video => video.site === "YouTube" && (video.type === "Trailer" || video.type === "Teaser")

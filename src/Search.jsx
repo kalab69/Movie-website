@@ -10,6 +10,7 @@ function Search() {
     const navigate = useNavigate();
     const search = searchParams.get('q')||"";
     useEffect(()=>{
+        document.title = ('Search' + ' - Novi-movies');
         if(!search.trim()){
             navigate('/');
         }
