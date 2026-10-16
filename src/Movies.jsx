@@ -23,7 +23,7 @@ function Movies() {
         setCount(1);
         setResults([]);
         window.scrollTo({ top: 0, behavior: "smooth" });
-         document.title = ('Movies' + ' - Novi-movies');
+         document.title = ('Movies' + ' - Novimovies');
     }, [genreId]);
 
     useEffect(() => {

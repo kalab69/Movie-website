@@ -7,12 +7,13 @@ const API_KEY = "18fff5e1b57ed556bacc51cd41ead165";
 function MovieDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
-    
+
     const [movie, setMovie] = useState(null);
     const [trailerKey, setTrailerKey] = useState(null);
     const [logoUrl, setLogoUrl] = useState(null);
     const [isMuted, setIsMuted] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
+    const [isWatching, setIsWatching] = useState(false);
 
     useEffect(() => {
         const fetchMovieDetails = async () => {
@@ -23,9 +24,9 @@ function MovieDetails() {
                     `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos,credits,recommendations,images&include_image_language=en,null`
                 );
                 const data = await response.json();
-                
+
                 setMovie(data);
-                document.title = data.title +  ' - Novimovies'
+                document.title = data.title + ' - Novimovies'
 
                 const officialTrailer = data.videos?.results.find(
                     video => video.site === "YouTube" && (video.type === "Trailer" || video.type === "Teaser")
@@ -65,6 +66,32 @@ function MovieDetails() {
         ?.filter(actor => actor.profile_path)
         ?.slice(0, 10) || [];
 
+    if (isWatching) {
+        const embedUrl = `https://cinesrc.st/embed/movie/${movie.id}`
+        return (<div className="fullscreenPlayerOverlay">
+            {/* Manual Back Button */}
+            <button className="backBtn" onClick={() => setIsWatching(false)}>
+                ⬅ Back to Details
+            </button>
+
+            {/* Video Player Embedder */}
+            <div className="playerWrapper">
+                <iframe
+                    src={embedUrl}
+                    width="100%"
+                    height="100%"
+                    frameborder="0"
+                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                    sandbox="allow-scripts allow-same-origin"
+                    allowfullscreen
+                    referrerpolicy="no-referrer"
+                    title="Video player"
+                />
+            </div>
+        </div>
+        )
+    }
+
     return (
         <div className="movieContainer">
             {/* HERO SECTION */}
@@ -90,7 +117,7 @@ function MovieDetails() {
                         ></iframe>
                     </div>
                 ) : (
-                    <div 
+                    <div
                         className="movieBackground"
                         style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})` }}
                     />
@@ -112,7 +139,9 @@ function MovieDetails() {
                     </div>
                     <p className="heroOverview">{movie.overview}</p>
                     <div className="heroButtons">
-                        <button className="playNowBtn">▶ Play Movie</button>
+                        <button className="playNowBtn" onClick={() => {
+                            setIsWatching(true)
+                        }}>▶ Play Movie</button>
                     </div>
                 </div>
             </div>
@@ -124,9 +153,9 @@ function MovieDetails() {
                     <div className="castScrollContainer">
                         {castList.map(actor => (
                             <div key={actor.id} className="castCard">
-                                <img 
-                                    src={actor.profile_path ? `https://image.tmdb.org/t/p/w185${actor.profile_path}` : "placeholder.png"} 
-                                    alt={actor.name} 
+                                <img
+                                    src={actor.profile_path ? `https://image.tmdb.org/t/p/w185${actor.profile_path}` : "placeholder.png"}
+                                    alt={actor.name}
                                 />
                                 <p className="actorName">{actor.name}</p>
                                 <p className="charName">{actor.character}</p>
@@ -140,7 +169,7 @@ function MovieDetails() {
                         <h2>Recommendations</h2>
                         <div className="container">
                             {recommendedMovies.map(recMovie => (
-                                <Card 
+                                <Card
                                     key={recMovie.id}
                                     image={recMovie.poster_path ? `https://image.tmdb.org/t/p/w500${recMovie.poster_path}` : "placeholder.png"}
                                     title={recMovie.title}
