@@ -7,7 +7,7 @@ const API_KEY = "18fff5e1b57ed556bacc51cd41ead165";
 function MovieDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
-    
+
     const [movie, setMovie] = useState(null);
     const [trailerKey, setTrailerKey] = useState(null);
     const [logoUrl, setLogoUrl] = useState(null);
@@ -27,7 +27,7 @@ function MovieDetails() {
                     `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&append_to_response=videos,credits,recommendations,images&include_image_language=en,null`
                 );
                 const data = await response.json();
-                
+
                 setMovie(data);
                 document.title = (data.name || data.title) + ' - Novimovies';
 
@@ -55,7 +55,7 @@ function MovieDetails() {
 
     useEffect(() => {
         if (!id) return;
-        
+
         fetch(`https://api.themoviedb.org/3/tv/${id}/season/${selectedSeason}?api_key=${API_KEY}`)
             .then(res => res.json())
             .then(data => {
@@ -109,7 +109,7 @@ function MovieDetails() {
                         ></iframe>
                     </div>
                 ) : (
-                    <div 
+                    <div
                         className="movieBackground"
                         style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})` }}
                     />
@@ -143,9 +143,9 @@ function MovieDetails() {
                     <div className="castScrollContainer">
                         {castList.map(actor => (
                             <div key={actor.id} className="castCard">
-                                <img 
-                                    src={actor.profile_path ? `https://image.tmdb.org/t/p/w185${actor.profile_path}` : "placeholder.png"} 
-                                    alt={actor.name} 
+                                <img
+                                    src={actor.profile_path ? `https://image.tmdb.org/t/p/w185${actor.profile_path}` : "placeholder.png"}
+                                    alt={actor.name}
                                 />
                                 <p className="actorName">{actor.name}</p>
                                 <p className="charName">{actor.character}</p>
@@ -158,9 +158,9 @@ function MovieDetails() {
                 <section className="sectionBlock episodesSection">
                     <div className="episodesHeader">
                         <h2>Episodes</h2>
-                        <select 
-                            className="seasonDropdown" 
-                            value={selectedSeason} 
+                        <select
+                            className="seasonDropdown"
+                            value={selectedSeason}
                             onChange={(e) => setSelectedSeason(Number(e.target.value))}
                         >
                             {movie.seasons
@@ -179,9 +179,15 @@ function MovieDetails() {
                             episodes.map(ep => (
                                 <div key={ep.id} className="episodeCard">
                                     <div className="episodeImageWrapper">
-                                        <img 
-                                            src={ep.still_path ? `https://image.tmdb.org/t/p/w500${ep.still_path}` : "placeholder.png"} 
-                                            alt={ep.name} 
+                                        <img
+                                            src={
+                                                ep.still_path
+                                                    ? `https://image.tmdb.org/t/p/w500${ep.still_path}`
+                                                    : movie?.backdrop_path
+                                                        ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
+                                                        : "placeholder.png"
+                                            }
+                                            alt={ep.name}
                                         />
                                         <div className="episodePlayOverlay">▶</div>
                                     </div>
@@ -211,7 +217,7 @@ function MovieDetails() {
                         <h2>Recommendations</h2>
                         <div className="container">
                             {recommendedMovies.map(recMovie => (
-                                <Card 
+                                <Card
                                     key={recMovie.id}
                                     image={recMovie.poster_path ? `https://image.tmdb.org/t/p/w500${recMovie.poster_path}` : "placeholder.png"}
                                     title={recMovie.title || recMovie.name}
