@@ -13,6 +13,9 @@ function MovieDetails() {
     const [logoUrl, setLogoUrl] = useState(null);
     const [isMuted, setIsMuted] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
+    const [isWatching, setIsWatching] = useState(false);
+    const [activeSeason, setActiveSeason] = useState(1);
+    const [activeEpisode, setActiveEpisode] = useState(1);
 
     // --- NEW: Seasons & Episodes State ---
     const [selectedSeason, setSelectedSeason] = useState(1);
@@ -22,7 +25,6 @@ function MovieDetails() {
         const fetchMovieDetails = async () => {
             setIsLoading(true);
             try {
-                // Swapped 'similar' for 'recommendations' for much better accuracy
                 const response = await fetch(
                     `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&append_to_response=videos,credits,recommendations,images&include_image_language=en,null`
                 );
@@ -84,6 +86,32 @@ function MovieDetails() {
         ?.filter(actor => actor.profile_path)
         ?.slice(0, 10) || [];
 
+    if (isWatching) {
+        const embedUrl = `https://cinesrc.st/embed/tv/${movie.id}?s=${activeSeason}&e=${activeEpisode}`
+        return (<div className="fullscreenPlayerOverlay">
+            {/* Manual Back Button */}
+            <button className="backBtn" onClick={() => setIsWatching(false)}>
+                ⬅ Back to Details
+            </button>
+
+            {/* Video Player Embedder */}
+            <div className="playerWrapper">
+                <iframe
+                    src={embedUrl}
+                    width="100%"
+                    height="100%"
+                    frameborder="0"
+                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                    sandbox="allow-scripts allow-same-origin"
+                    allowfullscreen
+                    referrerpolicy="no-referrer"
+                    title="Video player"
+                />
+            </div>
+        </div>
+        )
+    }
+
     return (
         <div className="movieContainer">
             {/* HERO SECTION */}
@@ -131,7 +159,11 @@ function MovieDetails() {
                     </div>
                     <p className="heroOverview">{movie.overview}</p>
                     <div className="heroButtons">
-                        <button className="playNowBtn">▶ Play Show</button>
+                        <button className="playNowBtn" onClick={() => {
+                            setIsWatching(true);
+                            setActiveSeason(1);
+                            setActiveEpisode(1);
+                        }}>▶ Play Show</button>
                     </div>
                 </div>
             </div>
@@ -177,7 +209,12 @@ function MovieDetails() {
                     <div className="episodesList">
                         {episodes.length > 0 ? (
                             episodes.map(ep => (
-                                <div key={ep.id} className="episodeCard">
+                                <div key={ep.id} className="episodeCard"
+                                    onClick={() => {
+                                        setActiveSeason(selectedSeason);
+                                        setActiveEpisode(ep.episode_number);
+                                        setIsWatching(true);
+                                    }}>
                                     <div className="episodeImageWrapper">
                                         <img
                                             src={
