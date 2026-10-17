@@ -11,6 +11,7 @@ function SliderLoader(props) {
     const [movies, setMovies] = useState([]);
     const [slide, setSlide] = useState(0);
     const [logo, setLogo] = useState(null);
+    const [isWatching, setIsWatching] = useState(false); // --- Added isWatching state ---
 
     const navigate = useNavigate();
 
@@ -32,14 +33,14 @@ function SliderLoader(props) {
 
     // Automatically advance the slider.
     useEffect(() => {
-        if (movies.length === 0) return;
+        if (movies.length === 0 || isWatching) return; // Pause slider when watching
 
         const interval = setInterval(() => {
             setSlide(previous => (previous + 1) % movies.length);
         }, 5000);
 
         return () => clearInterval(interval);
-    }, [movies.length]);
+    }, [movies.length, isWatching]);
 
     // Fetch the logo for the currently displayed movie or TV show.
     useEffect(() => {
@@ -118,6 +119,37 @@ function SliderLoader(props) {
 
     const currentMovie = movies[slide];
 
+    // --- If Play is clicked, render the Fullscreen Player Overlay ---
+    if (isWatching) {
+        const embedUrl = props.type === 'movie'
+            ? `https://cinesrc.st/embed/movie/${currentMovie.id}`
+            : `https://cinesrc.st/embed/tv/${currentMovie.id}?s=1&e=1`;
+
+        return (
+            <div className="fullscreenPlayerOverlay">
+                {/* Manual Back Button */}
+                <button className="backBtn" onClick={() => setIsWatching(false)}>
+                    ⬅ Back
+                </button>
+
+                {/* Video Player Embedder */}
+                <div className="playerWrapper">
+                    <iframe
+                        src={embedUrl}
+                        width="100%"
+                        height="100%"
+                        frameBorder="0"
+                        allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                        sandbox="allow-scripts allow-same-origin"
+                        allowFullScreen
+                        referrerPolicy="no-referrer"
+                        title="Video player"
+                    />
+                </div>
+            </div>
+        );
+    }
+
     return (
         <Slider
             key={currentMovie.id}
@@ -138,9 +170,7 @@ function SliderLoader(props) {
             nextSlide={nextSlide}
             privSlide={privSlide}
             onInfo={() => selectPathToNav(currentMovie.id, props.type)}
-            onPlay={() => {
-                selectPathToNav(currentMovie.id, props.type);
-            }}
+            onPlay={() => setIsWatching(true)} // Triggers the player overlay directly
         />
     );
 }

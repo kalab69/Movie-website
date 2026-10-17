@@ -73,7 +73,7 @@ function MovieDetails() {
         return (<div className="fullscreenPlayerOverlay">
             {/* Manual Back Button */}
             <button className="backBtn" onClick={() => setIsWatching(false)}>
-                ⬅ Back to Details
+                ⬅ Back
             </button>
 
             {/* Video Player Embedder */}
