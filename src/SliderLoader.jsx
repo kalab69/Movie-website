@@ -50,7 +50,6 @@ function SliderLoader(props) {
 
         let cancelled = false;
 
-        // Clear the previous title's logo while loading the next one.
         setLogo(null);
 
         const imagesUrl =
@@ -68,7 +67,6 @@ function SliderLoader(props) {
 
                 const logos = data.logos || [];
 
-                // Prefer English, then language-neutral, then any available logo.
                 const selectedLogo =
                     logos.find(item => item.iso_639_1 === 'en') ||
                     logos.find(item => item.iso_639_1 === null) ||
@@ -139,9 +137,10 @@ function SliderLoader(props) {
             description={currentMovie.overview}
             nextSlide={nextSlide}
             privSlide={privSlide}
-            onClick={() =>
-                selectPathToNav(currentMovie.id, props.type)
-            }
+            onInfo={() => selectPathToNav(currentMovie.id, props.type)}
+            onPlay={() => {
+                selectPathToNav(currentMovie.id, props.type);
+            }}
         />
     );
 }

@@ -32,14 +32,15 @@ function Slider(props) {
     }
 
     return (
-        <div className="slider" style={{ cursor: 'pointer' }}>
+        <div className="slider">
             <img
                 className="sliderBackdrop"
                 src={props.image}
                 alt={props.title}
             />
 
-            <div className="movieDetails" onClick={props.onClick}>
+            {/* Removed onClick and cursor pointer from here */}
+            <div className="movieDetails">
                 {props.logo ? (
                     <img
                         className="movieTitleLogo"
@@ -82,14 +83,43 @@ function Slider(props) {
                     </span>
                 </div>
 
-                <button
-                    type="button"
-                    onClick={props.onClick}
-                    className="playButton"
-                >
-                    <img src="/play.png" alt="" />
-                    Play Now
-                </button>
+                {/* Button Group: Play Now & Info */}
+                <div className="sliderButtons" style={{ display: 'flex', gap: '12px', alignItems: 'center', marginTop: '15px' }}>
+                    <button
+                        type="button"
+                        onClick={props.onPlay}
+                        className="playButton"
+                    >
+                        <img src="/play.png" alt="" />
+                        Play Now
+                    </button>
+
+                    <button
+                        type="button"
+                        onClick={props.onInfo}
+                        className="infoButton"
+                        style={{
+                            background: 'rgba(184, 184, 189, 0.7)',
+                            color: 'white',
+                            border: 'none',
+                            padding: '10px 20px',
+                            borderRadius: '107px',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            fontWeight: '600',
+                            transition: 'background 0.2s',
+                            width: '60px'
+                        }}
+                    >
+                        <img 
+                            src="https://api.iconify.design/lucide:info.svg?color=black" 
+                            alt="Info" 
+                            style={{ width: '30px', height: '30px' }} 
+                        />
+                    </button>
+                </div>
             </div>
 
             <button
