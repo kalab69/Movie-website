@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Card from './Card';
+import DownloadModal from './DownloadModal';
 
 const API_KEY = "18fff5e1b57ed556bacc51cd41ead165";
 
@@ -14,6 +15,7 @@ function MovieDetails() {
     const [isMuted, setIsMuted] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
     const [isWatching, setIsWatching] = useState(false);
+    const [isDownloading, setIsDownloading] = useState(false);
 
     useEffect(() => {
         const fetchMovieDetails = async () => {
@@ -93,6 +95,8 @@ function MovieDetails() {
     }
 
     return (
+        // 4. Render the modal right before your component returns its root div:
+
         <div className="movieContainer">
             {/* HERO SECTION */}
             <div className="heroSection">
@@ -142,7 +146,7 @@ function MovieDetails() {
                         <button className="playNowBtn" onClick={() => {
                             setIsWatching(true)
                         }}>▶ Play</button>
-                        <button className="downloadBtn" onClick={() => setIsWatching(true)}>
+                        <button className="downloadBtn" onClick={() => setIsDownloading(true)}>
                             <img
                                 src="https://api.iconify.design/lucide:download.svg?color=black"
                                 alt="Download"
@@ -190,6 +194,14 @@ function MovieDetails() {
                     </section>
                 )}
             </div>
+            {isDownloading && (
+                <DownloadModal 
+                    mediaType="movie"
+                    movieId={id} 
+                    mediaTitle={movie.title} 
+                    onClose={() => setIsDownloading(false)} 
+                />
+            )}
         </div>
     );
 }

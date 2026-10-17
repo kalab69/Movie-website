@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Card from './Card';
+import DownloadModal from './DownloadModal';
+
 
 const API_KEY = "18fff5e1b57ed556bacc51cd41ead165";
 
@@ -16,7 +18,7 @@ function MovieDetails() {
     const [isWatching, setIsWatching] = useState(false);
     const [activeSeason, setActiveSeason] = useState(1);
     const [activeEpisode, setActiveEpisode] = useState(1);
-
+    const [isDownloading, setIsDownloading] = useState(false);
     // --- NEW: Seasons & Episodes State ---
     const [selectedSeason, setSelectedSeason] = useState(1);
     const [episodes, setEpisodes] = useState([]);
@@ -164,7 +166,7 @@ function MovieDetails() {
                             setActiveSeason(1);
                             setActiveEpisode(1);
                         }}>▶ Play</button>
-                          <button className="downloadBtn" onClick={() => setIsWatching(true)}>
+                        <button className="downloadBtn" onClick={() => setIsDownloading(true)}>
                             <img
                                 src="https://api.iconify.design/lucide:download.svg?color=black"
                                 alt="Download"
@@ -275,6 +277,15 @@ function MovieDetails() {
                     </section>
                 )}
             </div>
+            {isDownloading && (
+                <DownloadModal
+                    mediaType="tv"
+                    movieId={id}
+                    mediaTitle={movie.name}
+                    tvDetails={movie}
+                    onClose={() => setIsDownloading(false)}
+                />
+            )}
         </div>
     );
 }

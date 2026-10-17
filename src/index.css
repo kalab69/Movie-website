@@ -1002,3 +1002,248 @@ body {
     height: 100%;
     border: none;
 }
+/* Download Modal Overlay */
+.downloadModalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.downloadModalBox {
+    background: #141416;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 600px;
+    max-height: 85vh;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+}
+
+.downloadModalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.downloadTitleArea h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+.downloadTitleArea p {
+    margin: 4px 0 0 0;
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+.closeModalBtn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.closeModalBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Filter Pills */
+.downloadFilters {
+    display: flex;
+    gap: 10px;
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.filterPill {
+    background: rgba(255, 255, 255, 0.05);
+    color: #aaa;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filterPill.active, .filterPill:hover {
+    background: #fff;
+    color: #000;
+    font-weight: 600;
+}
+
+/* Links List */
+.downloadLinksList {
+    padding: 20px 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+}
+
+.downloadItemCard {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 14px 16px;
+    border-radius: 12px;
+    transition: border-color 0.2s;
+}
+
+.downloadItemCard:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.downloadItemQualityBadge {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 8px 10px;
+    border-radius: 8px;
+    min-width: 48px;
+    text-align: center;
+}
+
+.downloadItemInfo {
+    flex: 1;
+    overflow: hidden;
+}
+
+.downloadItemNameRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.downloadItemFileNumber {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #fff;
+}
+
+.downloadItemSize {
+    font-size: 0.85rem;
+    color: #ffaa00;
+    font-weight: 600;
+}
+
+.downloadItemFullName {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #888;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.downloadActionBtn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.downloadActionBtn:hover {
+    background: #1d4ed8;
+}
+
+.downloadLoader, .noDownloadLinks {
+    text-align: center;
+    color: #888;
+    padding: 30px;
+    font-size: 0.95rem;
+}
+/* TV Season & Episode Selectors Row */
+.tvDropdownSelectors {
+    display: flex;
+    gap: 12px;
+    padding: 16px 24px 0 24px;
+}
+
+.selectWrapper {
+    flex: 1;
+    position: relative;
+}
+
+.modalDropdown {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 10px 16px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.modalDropdown:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.modalDropdown option {
+    background: #141416;
+    color: white;
+}
+
+/* Item Action Buttons Container */
+.downloadItemActions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.copyLinkBtn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.copyLinkBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
