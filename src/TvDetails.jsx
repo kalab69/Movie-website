@@ -163,7 +163,14 @@ function MovieDetails() {
                             setIsWatching(true);
                             setActiveSeason(1);
                             setActiveEpisode(1);
-                        }}>▶ Play Show</button>
+                        }}>▶ Play</button>
+                          <button className="downloadBtn" onClick={() => setIsWatching(true)}>
+                            <img
+                                src="https://api.iconify.design/lucide:download.svg?color=black"
+                                alt="Download"
+                                className="btnIcon"
+                            />
+                        </button>
                     </div>
                 </div>
             </div>

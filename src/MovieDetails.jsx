@@ -141,7 +141,14 @@ function MovieDetails() {
                     <div className="heroButtons">
                         <button className="playNowBtn" onClick={() => {
                             setIsWatching(true)
-                        }}>▶ Play Movie</button>
+                        }}>▶ Play</button>
+                        <button className="downloadBtn" onClick={() => setIsWatching(true)}>
+                            <img
+                                src="https://api.iconify.design/lucide:download.svg?color=black"
+                                alt="Download"
+                                className="btnIcon"
+                            />
+                        </button>
                     </div>
                 </div>
             </div>
