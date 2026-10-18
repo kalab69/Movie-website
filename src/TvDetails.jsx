@@ -19,6 +19,7 @@ function MovieDetails() {
     const [activeSeason, setActiveSeason] = useState(1);
     const [activeEpisode, setActiveEpisode] = useState(1);
     const [isDownloading, setIsDownloading] = useState(false);
+    const [music, setMusic] = useState(null);
     // --- NEW: Seasons & Episodes State ---
     const [selectedSeason, setSelectedSeason] = useState(1);
     const [episodes, setEpisodes] = useState([]);
@@ -33,6 +34,11 @@ function MovieDetails() {
                 const data = await response.json();
 
                 setMovie(data);
+                  const musicResponse = await fetch(
+                    `https://soundtrackdb.vercel.app/v1/titles/tmdb/${data.id}/music`
+                );
+                const musicData = await musicResponse.json();
+                setMusic(musicData);
                 document.title = (data.name || data.title) + ' - Novimovies';
 
                 const officialTrailer = data.videos?.results.find(
@@ -86,7 +92,7 @@ function MovieDetails() {
 
     const castList = movie.credits?.cast
         ?.filter(actor => actor.profile_path)
-        ?.slice(0, 10) || [];
+        ?.slice(0, 18) || [];
 
     if (isWatching) {
         const embedUrl = `https://cinesrc.st/embed/tv/${movie.id}?s=${activeSeason}&e=${activeEpisode}`
@@ -173,6 +179,37 @@ function MovieDetails() {
                                 className="btnIcon"
                             />
                         </button>
+                        {music?.music?.some(track => track.platform === "spotify" && track.url) ? (
+                            <a
+                                className="spotifyBtn"
+                                href={
+                                    music.music.find(
+                                        track => track.platform === "spotify" && track.url
+                                    ).url
+                                }
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="Open Spotify soundtrack"
+                            >
+                                <img
+                                    src="https://api.iconify.design/simple-icons:spotify.svg?color=%231DB954"
+                                    alt=""
+                                    className="spotifyIcon"
+                                />
+                            </a>
+                        ) : (
+                            <button
+                                className="spotifyBtn"
+                                disabled
+                                aria-label="Spotify soundtrack unavailable"
+                            >
+                                <img
+                                    src="https://api.iconify.design/simple-icons:spotify.svg?color=%231DB954"
+                                    alt=""
+                                    className="spotifyIcon"
+                                />
+                            </button>)
+                        }
                     </div>
                 </div>
             </div>

@@ -72,7 +72,7 @@ function MovieDetails() {
 
     const castList = movie.credits?.cast
         ?.filter(actor => actor.profile_path)
-        ?.slice(0, 10) || [];
+        ?.slice(0, 18) || [];
 
     if (isWatching) {
         const embedUrl = `https://cinesrc.st/embed/movie/${movie.id}`
