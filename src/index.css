@@ -1297,3 +1297,44 @@ body {
     padding: 40px;
     font-size: 0.95rem;
 }
+
+.spotifyBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    margin-left: 20px;
+}
+
+.spotifyIcon {
+    width: 40px;
+    height: 40px;
+    display: block;
+}
+
+.spotifyBtn:hover {
+    background-color: rgba(29, 185, 84, 0.12);
+    transform: scale(1.08);
+}
+
+.spotifyBtn:active {
+    transform: scale(0.95);
+}
+
+.spotifyBtn:focus-visible {
+    outline: 2px solid #1DB954;
+    outline-offset: 3px;
+}
+.heroButtons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}

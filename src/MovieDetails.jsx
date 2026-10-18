@@ -153,6 +153,19 @@ function MovieDetails() {
                                 className="btnIcon"
                             />
                         </button>
+                        <a
+                            className="spotifyBtn"
+                            href="https://open.spotify.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Open Spotify"
+                        >
+                            <img
+                                src="https://api.iconify.design/simple-icons:spotify.svg?color=%231DB954"
+                                alt=""
+                                className="spotifyIcon"
+                            />
+                        </a>
                     </div>
                 </div>
             </div>
@@ -195,11 +208,11 @@ function MovieDetails() {
                 )}
             </div>
             {isDownloading && (
-                <DownloadModal 
+                <DownloadModal
                     mediaType="movie"
-                    movieId={id} 
-                    mediaTitle={movie.title} 
-                    onClose={() => setIsDownloading(false)} 
+                    movieId={id}
+                    mediaTitle={movie.title}
+                    onClose={() => setIsDownloading(false)}
                 />
             )}
         </div>
