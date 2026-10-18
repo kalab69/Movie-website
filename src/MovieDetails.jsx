@@ -16,6 +16,7 @@ function MovieDetails() {
     const [isLoading, setIsLoading] = useState(true);
     const [isWatching, setIsWatching] = useState(false);
     const [isDownloading, setIsDownloading] = useState(false);
+    const [music, setMusic] = useState(null);
 
     useEffect(() => {
         const fetchMovieDetails = async () => {
@@ -26,6 +27,11 @@ function MovieDetails() {
                     `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos,credits,recommendations,images&include_image_language=en,null`
                 );
                 const data = await response.json();
+                const musicResponse = await fetch(
+                    `https://soundtrackdb.vercel.app/v1/titles/tmdb/${data.id}/music`
+                );
+                const musicData = await musicResponse.json();
+                setMusic(musicData);
 
                 setMovie(data);
                 document.title = data.title + ' - Novimovies'
@@ -153,19 +159,37 @@ function MovieDetails() {
                                 className="btnIcon"
                             />
                         </button>
-                        <a
-                            className="spotifyBtn"
-                            href="https://open.spotify.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Open Spotify"
-                        >
-                            <img
-                                src="https://api.iconify.design/simple-icons:spotify.svg?color=%231DB954"
-                                alt=""
-                                className="spotifyIcon"
-                            />
-                        </a>
+                        {music?.music?.some(track => track.platform === "spotify" && track.url) ? (
+                            <a
+                                className="spotifyBtn"
+                                href={
+                                    music.music.find(
+                                        track => track.platform === "spotify" && track.url
+                                    ).url
+                                }
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="Open Spotify soundtrack"
+                            >
+                                <img
+                                    src="https://api.iconify.design/simple-icons:spotify.svg?color=%231DB954"
+                                    alt=""
+                                    className="spotifyIcon"
+                                />
+                            </a>
+                        ) : (
+                            <button
+                                className="spotifyBtn"
+                                disabled
+                                aria-label="Spotify soundtrack unavailable"
+                            >
+                                <img
+                                    src="https://api.iconify.design/simple-icons:spotify.svg?color=%231DB954"
+                                    alt=""
+                                    className="spotifyIcon"
+                                />
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
