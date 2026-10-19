@@ -75,7 +75,7 @@ function MovieDetails() {
         ?.slice(0, 18) || [];
 
     if (isWatching) {
-        const embedUrl = `https://cinesrc.st/embed/movie/${movie.id}`
+        const embedUrl = `https://embed.vidrift.net/embed/movie/${movie.id}`
         return (<div className="fullscreenPlayerOverlay">
             {/* Manual Back Button */}
             <button className="backBtn" onClick={() => setIsWatching(false)}>
@@ -172,7 +172,7 @@ function MovieDetails() {
                                 aria-label="Open Spotify soundtrack"
                             >
                                 <img
-                                    src="https://api.iconify.design/simple-icons:spotify.svg?color=%231DB954"
+                                    src="https://cdn.simpleicons.org/spotify/1DB954?utm_source=chatgpt.com"
                                     alt=""
                                     className="spotifyIcon"
                                 />
@@ -184,7 +184,7 @@ function MovieDetails() {
                                 aria-label="Spotify soundtrack unavailable"
                             >
                                 <img
-                                    src="https://api.iconify.design/simple-icons:spotify.svg?color=%231DB954"
+                                    src="https://cdn.simpleicons.org/spotify/1DB954?utm_source=chatgpt.com"
                                     alt=""
                                     className="spotifyIcon"
                                 />

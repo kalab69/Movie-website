@@ -95,7 +95,7 @@ function MovieDetails() {
         ?.slice(0, 18) || [];
 
     if (isWatching) {
-        const embedUrl = `https://cinesrc.st/embed/tv/${movie.id}?s=${activeSeason}&e=${activeEpisode}`
+        const embedUrl = `https://embed.vidrift.net/embed/tv/${movie.id}/${activeSeason}/${activeEpisode}`
         return (<div className="fullscreenPlayerOverlay">
             {/* Manual Back Button */}
             <button className="backBtn" onClick={() => setIsWatching(false)}>
@@ -110,7 +110,6 @@ function MovieDetails() {
                     height="100%"
                     frameborder="0"
                     allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                    sandbox="allow-scripts allow-same-origin"
                     allowfullscreen
                     referrerpolicy="no-referrer"
                     title="Video player"
@@ -192,7 +191,7 @@ function MovieDetails() {
                                 aria-label="Open Spotify soundtrack"
                             >
                                 <img
-                                    src="https://api.iconify.design/simple-icons:spotify.svg?color=%231DB954"
+                                    src="https://cdn.simpleicons.org/spotify/1DB954?utm_source=chatgpt.com"
                                     alt=""
                                     className="spotifyIcon"
                                 />
@@ -204,7 +203,7 @@ function MovieDetails() {
                                 aria-label="Spotify soundtrack unavailable"
                             >
                                 <img
-                                    src="https://api.iconify.design/simple-icons:spotify.svg?color=%231DB954"
+                                    src="https://cdn.simpleicons.org/spotify/1DB954?utm_source=chatgpt.com"
                                     alt=""
                                     className="spotifyIcon"
                                 />

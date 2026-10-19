@@ -122,8 +122,8 @@ function SliderLoader(props) {
     // --- If Play is clicked, render the Fullscreen Player Overlay ---
     if (isWatching) {
         const embedUrl = props.type === 'movie'
-            ? `https://cinesrc.st/embed/movie/${currentMovie.id}`
-            : `https://cinesrc.st/embed/tv/${currentMovie.id}?s=1&e=1`;
+            ? `https://embed.vidrift.net/embed/movie/${currentMovie.id}`
+            : `https://embed.vidrift.net/embed/tv/${currentMovie.id}/1/1`;
 
         return (
             <div className="fullscreenPlayerOverlay">
@@ -140,7 +140,6 @@ function SliderLoader(props) {
                         height="100%"
                         frameBorder="0"
                         allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                        sandbox="allow-scripts allow-same-origin"
                         allowFullScreen
                         referrerPolicy="no-referrer"
                         title="Video player"
