@@ -90,7 +90,6 @@ function MovieDetails() {
                     height="100%"
                     frameborder="0"
                     allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                    sandbox="allow-scripts allow-same-origin"
                     allowfullscreen
                     referrerpolicy="no-referrer"
                     title="Video player"
