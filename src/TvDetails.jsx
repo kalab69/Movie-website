@@ -173,7 +173,7 @@ function MovieDetails() {
                         }}>▶ Play</button>
                         <button className="downloadBtn" onClick={() => setIsDownloading(true)}>
                             <img
-                                src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/info.svg"
+                                src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/download.svg"
                                 alt="Download"
                                 className="btnIcon"
                             />
