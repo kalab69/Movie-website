@@ -742,7 +742,7 @@ body {
 }
 
 .downloadBtn {
-    padding: 12px 30px;
+    padding: 7px 25px;
     font-size: 1.2rem;
     font-weight: bold;
     background-color: white;
@@ -757,9 +757,10 @@ body {
 }
 
 .btnIcon {
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
     object-fit: contain;
+
 }
 
 .downloadBtn:hover {

@@ -114,7 +114,7 @@ function Slider(props) {
                         }}
                     >
                         <img 
-                            src="https://api.iconify.design/lucide:info.svg?color=black" 
+                            src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/info.svg" 
                             alt="Info" 
                             style={{ width: '30px', height: '30px' }} 
                         />
